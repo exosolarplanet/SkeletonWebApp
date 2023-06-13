@@ -38,6 +38,23 @@ public class QueryProcessor {
       return a;
     }
 
+    if (query.toLowerCase().contains("plus")) {
+      Pattern integerPattern = Pattern.compile("-?\\d+");
+      Matcher matcher = integerPattern.matcher(query);
+      List<String> integerList = new ArrayList<>();
+
+      while (matcher.find()) {
+        integerList.add(matcher.group());
+      }
+
+      List<Integer> intList =  integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
+      Integer sum = intList.stream()
+              .mapToInt(Integer::intValue)
+              .sum();
+      String a = Integer.toString(sum);
+      return a;
+    }
+
     return "";
   }
 }
