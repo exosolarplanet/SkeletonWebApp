@@ -13,7 +13,7 @@ public class QueryProcessor {
     }
 
     if (query.toLowerCase().contains("your name?")) {
-      return "Ece";
+      return "ece";
     }
 
     return "";
