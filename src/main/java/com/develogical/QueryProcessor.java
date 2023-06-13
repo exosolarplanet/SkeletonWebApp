@@ -1,5 +1,13 @@
 package com.develogical;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 public class QueryProcessor {
 
   public String process(String query) {
@@ -14,6 +22,20 @@ public class QueryProcessor {
 
     if (query.toLowerCase().contains("your name?")) {
       return "ece";
+    }
+
+    if (query.toLowerCase().contains("largest")) {
+      Pattern integerPattern = Pattern.compile("-?\\d+");
+      Matcher matcher = integerPattern.matcher(query);
+      List<String> integerList = new ArrayList<>();
+
+      while (matcher.find()) {
+        integerList.add(matcher.group());
+      }
+
+      List<Integer> intList =  integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
+      String a = Integer.toString(Collections.max(intList));
+      return a;
     }
 
     return "";
