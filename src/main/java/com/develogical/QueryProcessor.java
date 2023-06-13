@@ -47,7 +47,7 @@ public class QueryProcessor {
         integerList.add(matcher.group());
       }
 
-      List<Integer> intList =  integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
+      List<Integer> intList = integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
       Integer sum = intList.stream()
               .mapToInt(Integer::intValue)
               .sum();
@@ -69,6 +69,28 @@ public class QueryProcessor {
               .mapToInt(Integer::intValue)
               .reduce(1, Math::multiplyExact);
       String a = Integer.toString(sum);
+      return a;
+    }
+
+    if (query.toLowerCase().contains("square and a cube")) {
+      Pattern integerPattern = Pattern.compile("-?\\d+");
+      Matcher matcher = integerPattern.matcher(query);
+      List<String> integerList = new ArrayList<>();
+
+      while (matcher.find()) {
+        integerList.add(matcher.group());
+      }
+
+      List<Integer> intList =  integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
+      Integer b = null;
+      for(Integer i : intList){
+        if ((Math.sqrt(i) % 1) == 0){
+          if((Math.cbrt(i) % 1) == 0){
+            b = i;
+          }
+        }
+      }
+      String a = Integer.toString(b);
       return a;
     }
 
