@@ -55,6 +55,23 @@ public class QueryProcessor {
       return a;
     }
 
+    if (query.toLowerCase().contains("multiplied")) {
+      Pattern integerPattern = Pattern.compile("-?\\d+");
+      Matcher matcher = integerPattern.matcher(query);
+      List<String> integerList = new ArrayList<>();
+
+      while (matcher.find()) {
+        integerList.add(matcher.group());
+      }
+
+      List<Integer> intList =  integerList.stream().map(Integer::parseInt).collect(Collectors.toList());
+      Integer sum = intList.stream()
+              .mapToInt(Integer::intValue)
+              .reduce(1, Math::multiplyExact);
+      String a = Integer.toString(sum);
+      return a;
+    }
+
     return "";
   }
 }
